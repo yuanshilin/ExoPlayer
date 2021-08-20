@@ -530,6 +530,14 @@
     "name": "Misc",
     "samples": [
       {
+        "name":"MP3",
+        "uri": "http://172.20.99.13:8080/media/jr.mp3"
+      },
+      {
+        "name": "AC3",
+        "uri" : "http://172.20.99.13:8080/media/5.1ac3.ac3"
+      },
+      {
         "name": "Dizzy (MP4)",
         "uri": "https://html5demos.com/assets/dizzy.mp4"
       },
