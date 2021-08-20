@@ -260,6 +260,7 @@ public abstract class DecoderAudioRenderer<
 
   @Override
   public void render(long positionUs, long elapsedRealtimeUs) throws ExoPlaybackException {
+    // 是否处理播放结束
     if (outputStreamEnded) {
       try {
         audioSink.playToEndOfStream();
@@ -294,13 +295,16 @@ public abstract class DecoderAudioRenderer<
     }
 
     // If we don't have a decoder yet, we need to instantiate one.
+    // 配置Codec
     maybeInitDecoder();
 
     if (decoder != null) {
       try {
         // Rendering loop.
         TraceUtil.beginSection("drainAndFeed");
+        // 消耗解码后的数据
         while (drainOutputBuffer()) {}
+        //  填充源数据
         while (feedInputBuffer()) {}
         TraceUtil.endSection();
       } catch (DecoderException e) {

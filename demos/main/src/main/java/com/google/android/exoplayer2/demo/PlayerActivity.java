@@ -262,8 +262,10 @@ public class PlayerActivity extends AppCompatActivity
 
       boolean preferExtensionDecoders =
           intent.getBooleanExtra(IntentUtil.PREFER_EXTENSION_DECODERS_EXTRA, false);
+
       RenderersFactory renderersFactory =
           DemoUtil.buildRenderersFactory(/* context= */ this, preferExtensionDecoders);
+
       MediaSourceFactory mediaSourceFactory =
           new DefaultMediaSourceFactory(dataSourceFactory)
               .setAdsLoaderProvider(this::getAdsLoader)
@@ -277,10 +279,13 @@ public class PlayerActivity extends AppCompatActivity
               .setMediaSourceFactory(mediaSourceFactory)
               .setTrackSelector(trackSelector)
               .build();
+
       player.addListener(new PlayerEventListener());
       player.addAnalyticsListener(new EventLogger(trackSelector));
       player.setAudioAttributes(AudioAttributes.DEFAULT, /* handleAudioFocus= */ true);
       player.setPlayWhenReady(startAutoPlay);
+
+
       playerView.setPlayer(player);
       debugViewHelper = new DebugTextViewHelper(player, debugTextView);
       debugViewHelper.start();
