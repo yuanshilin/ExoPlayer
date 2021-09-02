@@ -7,7 +7,7 @@
         "uri": "http://172.20.99.13:8080/media/7.1.wav"
       },{
         "name": "mp3",
-        "uri": "http://172.20.99.13:8080/media/qn.wav"
+        "uri": "http://172.20.99.13:8080/media/qn.mp3"
       }
     ]
   },
