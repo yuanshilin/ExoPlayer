@@ -238,6 +238,9 @@ public class SampleChooserActivity extends AppCompatActivity
 
     // mediaItems 添加到Intent
     IntentUtil.addToIntent(playlistHolder.mediaItems, intent);
+
+    // 如果从Activity A 跳转到Activity B，A和B的生命周期分别是怎么过的
+    // A.onPause(不可交互) -> B.onCreate(创建) -> B.onStart(可见) -> A.onStop(不可见)   -> B.onResume(可交互)
     startActivity(intent);
     return true;
   }

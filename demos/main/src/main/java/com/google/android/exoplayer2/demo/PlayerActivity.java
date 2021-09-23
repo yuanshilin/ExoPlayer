@@ -115,6 +115,8 @@ public class PlayerActivity extends AppCompatActivity
     playerView.setErrorMessageProvider(new PlayerErrorMessageProvider());
     playerView.requestFocus();
 
+    // 在实际应用中，当一个Activity结束前，如果需要保存状态，就在onSaveInstanceState中，将状态数据以key-value的形式放入到saveInsanceState中。
+    // 这样，当一个Activity被创建时，就能从onCreate的参数savedInstanceState中获得状态数据。
     if (savedInstanceState != null) {
       trackSelectorParameters = savedInstanceState.getParcelable(KEY_TRACK_SELECTOR_PARAMETERS);
       startAutoPlay = savedInstanceState.getBoolean(KEY_AUTO_PLAY);
