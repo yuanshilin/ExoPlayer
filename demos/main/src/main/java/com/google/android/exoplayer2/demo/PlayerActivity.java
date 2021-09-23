@@ -257,8 +257,12 @@ public class PlayerActivity extends AppCompatActivity
   /** @return Whether initialization was successful. */
   protected boolean initializePlayer() {
     if (player == null) {
+
+      // getIntent
+      // Return the intent that started this activity
       Intent intent = getIntent();
 
+      // 从Intent获取List<MediaItem>
       mediaItems = createMediaItems(intent);
       if (mediaItems.isEmpty()) {
         return false;
@@ -267,9 +271,11 @@ public class PlayerActivity extends AppCompatActivity
       boolean preferExtensionDecoders =
           intent.getBooleanExtra(IntentUtil.PREFER_EXTENSION_DECODERS_EXTRA, false);
 
+      // Render Factory
       RenderersFactory renderersFactory =
           DemoUtil.buildRenderersFactory(/* context= */ this, preferExtensionDecoders);
 
+      // MediaSourceFactory
       MediaSourceFactory mediaSourceFactory =
           new DefaultMediaSourceFactory(dataSourceFactory)
               .setAdsLoaderProvider(this::getAdsLoader)
@@ -278,6 +284,8 @@ public class PlayerActivity extends AppCompatActivity
       trackSelector = new DefaultTrackSelector(/* context= */ this);
       trackSelector.setParameters(trackSelectorParameters);
       lastSeenTrackGroupArray = null;
+
+      // 构建播放器
       player =
           new SimpleExoPlayer.Builder(/* context= */ this, renderersFactory)
               .setMediaSourceFactory(mediaSourceFactory)
@@ -298,6 +306,8 @@ public class PlayerActivity extends AppCompatActivity
     if (haveStartPosition) {
       player.seekTo(startWindow, startPosition);
     }
+
+    // 设置播放内容
     player.setMediaItems(mediaItems, /* resetPosition= */ !haveStartPosition);
     player.prepare();
     updateButtonVisibility();
