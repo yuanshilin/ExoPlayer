@@ -85,17 +85,20 @@ public class SampleChooserActivity extends AppCompatActivity
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.sample_chooser_activity);
+
+    // 处理ExpandableList
     sampleAdapter = new SampleAdapter();
     sampleListView = findViewById(R.id.sample_list);
 
     sampleListView.setAdapter(sampleAdapter);
-    sampleListView.setOnChildClickListener(this);
+    sampleListView.setOnChildClickListener(this); // OnChildClickListener
 
     Intent intent = getIntent();
     String dataUri = intent.getDataString();
     if (dataUri != null) {
       uris = new String[] {dataUri};
     } else {
+      // 获取assets目录下面的内容
       ArrayList<String> uriList = new ArrayList<>();
       AssetManager assetManager = getAssets();
       try {
@@ -222,7 +225,10 @@ public class SampleChooserActivity extends AppCompatActivity
     prefEditor.putInt(CHILD_POSITION_PREFERENCE_KEY, childPosition);
     prefEditor.apply();
 
+    //  获取需要被播放媒体信息
     PlaylistHolder playlistHolder = (PlaylistHolder) view.getTag();
+
+    //  启动播放器
     Intent intent = new Intent(this, PlayerActivity.class);
     intent.putExtra(
         IntentUtil.PREFER_EXTENSION_DECODERS_EXTRA,

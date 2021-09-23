@@ -18,6 +18,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+  // 一种用于垂直滚动展示两级列表的视图,组可以单独展开
   <ExpandableListView android:id="@+id/sample_list"
       android:layout_width="match_parent"
       android:layout_height="match_parent"/>
