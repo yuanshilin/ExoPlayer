@@ -220,12 +220,14 @@ public class SampleChooserActivity extends AppCompatActivity
   public boolean onChildClick(
       ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
     // Save the selected item first to be able to restore it if the tested code crashes.
+    // 简单的数据存储（SharedPreferences.Editor）, 其他地方通过GROUP_POSITION_PREFERENCE_KEY获取内容
     SharedPreferences.Editor prefEditor = getPreferences(MODE_PRIVATE).edit();
     prefEditor.putInt(GROUP_POSITION_PREFERENCE_KEY, groupPosition);
     prefEditor.putInt(CHILD_POSITION_PREFERENCE_KEY, childPosition);
     prefEditor.apply();
 
-    //  获取需要被播放媒体信息
+    // 获取需要被播放媒体信息
+    // View中的setTag（object）表示给View添加一个格外的数据，以后可以用getTag()将这个数据取出来。
     PlaylistHolder playlistHolder = (PlaylistHolder) view.getTag();
 
     //  启动播放器
@@ -233,6 +235,8 @@ public class SampleChooserActivity extends AppCompatActivity
     intent.putExtra(
         IntentUtil.PREFER_EXTENSION_DECODERS_EXTRA,
         isNonNullAndChecked(preferExtensionDecodersMenuItem));
+
+    // mediaItems 添加到Intent
     IntentUtil.addToIntent(playlistHolder.mediaItems, intent);
     startActivity(intent);
     return true;
