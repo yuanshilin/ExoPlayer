@@ -195,7 +195,7 @@ public class SimpleExoPlayer extends BasePlayer
      *
      * @param context A {@link Context}.
      * @param extractorsFactory An {@link ExtractorsFactory} used to extract progressive media from
-     *     its container.
+     *     its container.i
      */
     public Builder(Context context, ExtractorsFactory extractorsFactory) {
       this(context, new DefaultRenderersFactory(context), extractorsFactory);
@@ -683,6 +683,8 @@ public class SimpleExoPlayer extends BasePlayer
       metadataOutputs = new CopyOnWriteArraySet<>();
       deviceListeners = new CopyOnWriteArraySet<>();
       Handler eventHandler = new Handler(builder.looper);
+
+      // 构建render
       renderers =
           builder.renderersFactory.createRenderers(
               eventHandler,
@@ -714,6 +716,9 @@ public class SimpleExoPlayer extends BasePlayer
                   COMMAND_SET_VIDEO_SURFACE,
                   COMMAND_GET_TEXT)
               .build();
+
+      // Build the player and associated objects.
+      // ExoPlayerImpl
       player =
           new ExoPlayerImpl(
               renderers,

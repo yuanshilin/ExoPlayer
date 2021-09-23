@@ -161,6 +161,11 @@ import java.util.concurrent.CopyOnWriteArraySet;
             + "] ["
             + Util.DEVICE_DEBUG_INFO
             + "]");
+
+
+    //  需要注意的是ExoPlayerImplInternal实现了Handler.Callback接口，所以实例化的方式是以new Handler来进行，
+    //  那么ExoPlayerImplInternal必然实现了handleMessage方法，同时，也知道了ExoPlayerImplInternal的内部是以消息机制来通信的。
+    //  所以，到目前为止我们清楚了ExoPlayerImplInternal才是内部的核心播放器，上面的几层封装不过是为了服务于api函数而已。
     checkState(renderers.length > 0);
     this.renderers = checkNotNull(renderers);
     this.trackSelector = checkNotNull(trackSelector);

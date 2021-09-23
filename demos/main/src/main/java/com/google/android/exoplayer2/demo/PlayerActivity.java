@@ -287,7 +287,7 @@ public class PlayerActivity extends AppCompatActivity
 
       // 构建播放器
       player =
-          new SimpleExoPlayer.Builder(/* context= */ this, renderersFactory)
+          new SimpleExoPlayer.Bulder(/* context= */ this, renderersFactory)
               .setMediaSourceFactory(mediaSourceFactory)
               .setTrackSelector(trackSelector)
               .build();
