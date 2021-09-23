@@ -100,6 +100,8 @@ public class PlayerActivity extends AppCompatActivity
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    // DataSource.Factory
     dataSourceFactory = DemoUtil.getDataSourceFactory(/* context= */ this);
 
     setContentView();
