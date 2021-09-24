@@ -244,10 +244,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
     playbackInfo = PlaybackInfo.createDummy(emptyTrackSelectorResult);
     playbackInfoUpdate = new PlaybackInfoUpdate(playbackInfo);
     rendererCapabilities = new RendererCapabilities[renderers.length];
+    // 获取每个渲染器的属性
     for (int i = 0; i < renderers.length; i++) {
       renderers[i].setIndex(i);
       rendererCapabilities[i] = renderers[i].getCapabilities();
     }
+
+    // 音视频同步会使用该类
     mediaClock = new DefaultMediaClock(this, clock);
     pendingMessages = new ArrayList<>();
     window = new Timeline.Window();
@@ -262,6 +265,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
     // Note: The documentation for Process.THREAD_PRIORITY_AUDIO that states "Applications can
     // not normally change to this priority" is incorrect.
+    // 创建一个子线程：用于分担main looper的工作量
     internalPlaybackThread = new HandlerThread("ExoPlayer:Playback", Process.THREAD_PRIORITY_AUDIO);
     internalPlaybackThread.start();
     playbackLooper = internalPlaybackThread.getLooper();

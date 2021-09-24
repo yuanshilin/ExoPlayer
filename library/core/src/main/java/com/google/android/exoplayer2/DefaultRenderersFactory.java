@@ -308,6 +308,8 @@ public class DefaultRenderersFactory implements RenderersFactory {
       TextOutput textRendererOutput,
       MetadataOutput metadataRendererOutput) {
     ArrayList<Renderer> renderersList = new ArrayList<>();
+
+    // video的render
     buildVideoRenderers(
         context,
         extensionRendererMode,
@@ -317,6 +319,8 @@ public class DefaultRenderersFactory implements RenderersFactory {
         videoRendererEventListener,
         allowedVideoJoiningTimeMs,
         renderersList);
+
+    // audio的render
     @Nullable
     AudioSink audioSink =
         buildAudioSink(context, enableFloatOutput, enableAudioTrackPlaybackParams, enableOffload);
@@ -331,11 +335,16 @@ public class DefaultRenderersFactory implements RenderersFactory {
           audioRendererEventListener,
           renderersList);
     }
+
+    // 字幕文本的render
     buildTextRenderers(context, textRendererOutput, eventHandler.getLooper(),
         extensionRendererMode, renderersList);
+    // MetaData的render
     buildMetadataRenderers(context, metadataRendererOutput, eventHandler.getLooper(),
         extensionRendererMode, renderersList);
+    // 动态摄像机的render ???
     buildCameraMotionRenderers(context, extensionRendererMode, renderersList);
+    // 混合render ???
     buildMiscellaneousRenderers(context, eventHandler, extensionRendererMode, renderersList);
     return renderersList.toArray(new Renderer[0]);
   }
