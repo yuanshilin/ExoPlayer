@@ -739,14 +739,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
     playbackInfo = playbackInfo.copyWithPlayWhenReady(playWhenReady, playbackSuppressionReason);
     isRebuffering = false;
     notifyTrackSelectionPlayWhenReadyChanged(playWhenReady);
+
     if (!shouldPlayWhenReady()) {
       stopRenderers();
       updatePlaybackPositions();
     } else {
       if (playbackInfo.playbackState == Player.STATE_READY) {
+        // 如果播放器状态为ready，则开始渲染并发送MSG_DO_SOME_WORK消息
         startRenderers();
         handler.sendEmptyMessage(MSG_DO_SOME_WORK);
       } else if (playbackInfo.playbackState == Player.STATE_BUFFERING) {
+        // 如果播放器状态为buffring，发送MSG_DO_SOME_WORK消息
         handler.sendEmptyMessage(MSG_DO_SOME_WORK);
       }
     }

@@ -1506,6 +1506,7 @@ public class SimpleExoPlayer extends BasePlayer
   @Override
   public void setPlayWhenReady(boolean playWhenReady) {
     verifyApplicationThread();
+    // 与音频焦点相关 ??
     @AudioFocusManager.PlayerCommand
     int playerCommand = audioFocusManager.updateAudioFocus(playWhenReady, getPlaybackState());
     updatePlayWhenReady(
@@ -2007,6 +2008,7 @@ public class SimpleExoPlayer extends BasePlayer
         playWhenReady && playerCommand != AudioFocusManager.PLAYER_COMMAND_PLAY_WHEN_READY
             ? Player.PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS
             : Player.PLAYBACK_SUPPRESSION_REASON_NONE;
+    // 调用ExoPlayerImpl的对应函数
     player.setPlayWhenReady(playWhenReady, playbackSuppressionReason, playWhenReadyChangeReason);
   }
 

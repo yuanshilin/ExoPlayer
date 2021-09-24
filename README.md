@@ -8,6 +8,7 @@ ExoPlayer播放器是一款Google推出的应用级播放器，其本质是调�
 
 + 播放器实例
 ![architecture](./docs/images/exo.png)
+![architecture](./docs/images/exo-state.png)
 
 #### 参考资料
 + [《ExoPlayer简单使用》](https://www.jianshu.com/p/7cecaa990605)
