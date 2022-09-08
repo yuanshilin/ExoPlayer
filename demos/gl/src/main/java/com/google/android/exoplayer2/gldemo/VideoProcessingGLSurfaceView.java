@@ -90,6 +90,7 @@ public final class VideoProcessingGLSurfaceView extends GLSurfaceView {
   public VideoProcessingGLSurfaceView(
       Context context, boolean requireSecureContext, VideoProcessor videoProcessor) {
     super(context);
+
     renderer = new VideoRenderer(videoProcessor);
     mainHandler = new Handler();
     setEGLContextClientVersion(2);

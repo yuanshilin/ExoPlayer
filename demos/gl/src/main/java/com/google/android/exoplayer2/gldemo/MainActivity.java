@@ -70,6 +70,8 @@ public final class MainActivity extends Activity {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main_activity);
+
+    // PlayView
     playerView = findViewById(R.id.player_view);
 
     Context context = getApplicationContext();
@@ -83,8 +85,10 @@ public final class MainActivity extends Activity {
     VideoProcessingGLSurfaceView videoProcessingGLSurfaceView =
         new VideoProcessingGLSurfaceView(
             context, requestSecureSurface, new BitmapOverlayVideoProcessor(context));
+
     FrameLayout contentFrame = findViewById(R.id.exo_content_frame);
     contentFrame.addView(videoProcessingGLSurfaceView);
+
     this.videoProcessingGLSurfaceView = videoProcessingGLSurfaceView;
   }
 
@@ -177,6 +181,7 @@ public final class MainActivity extends Activity {
     player.setMediaSource(mediaSource);
     player.prepare();
     player.play();
+
     VideoProcessingGLSurfaceView videoProcessingGLSurfaceView =
         Assertions.checkNotNull(this.videoProcessingGLSurfaceView);
     videoProcessingGLSurfaceView.setVideoComponent(
